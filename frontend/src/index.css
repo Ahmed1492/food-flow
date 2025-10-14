@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+.bg-header {
+  width: 100%;
+  height: 74vh;
+  background: linear-gradient(
+      to left,
+      rgb(189, 48, 23),
+      transparent,
+      transparent,
+      rgb(189, 48, 23)
+    ),
+    url(/src/assets/header_img.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center 124%;
+  border-radius: 22px;
+  margin-top: 3rem;
+  color: #fff;
+}
+.bg-header div {
+  animation: fadeIn, 3s;
+  -webkit-animation: fadeIn 2.1s;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
