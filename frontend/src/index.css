@@ -15,7 +15,7 @@
   background-size: cover;
   background-position: center 124%;
   border-radius: 22px;
-  margin-top: 3rem;
+  margin-top: 1rem;
   color: #fff;
 }
 .bg-header div {
@@ -29,7 +29,7 @@
 .fadeIn {
   animation: fadeIn 1s;
 }
-  
+
 #food-display {
   animation: fadeIn 2s;
 }

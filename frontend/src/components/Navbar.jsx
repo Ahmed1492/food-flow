@@ -3,7 +3,7 @@ import { assets } from "../assets/assets";
 const Navbar = () => {
   const [menu, setMenu] = useState("home");
   return (
-    <div className="flex items-center text-[#49557e] justify-between">
+    <div className="flex items-center text-[#49557e] justify-between px-[8%] py-5">
       <img className="w-[150px]" src={assets.logo} alt="logo" />
       <ul className="flex items-center text-[17px] duration-500  gap-4">
         <li
