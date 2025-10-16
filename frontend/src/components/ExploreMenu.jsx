@@ -3,7 +3,7 @@ import { menu_list } from "../assets/assets";
 
 const ExploreMenu = ({ category, setCategory }) => {
   return (
-    <div className="mt-[3rem]">
+    <div id="explore-menu" className="mt-[3rem]">
       <div className="flex flex-col gap-6">
         <h2 className="text-4xl">Explore our menu</h2>
         <p className="max-w-2xl font-medium">
@@ -26,7 +26,7 @@ const ExploreMenu = ({ category, setCategory }) => {
             <img
               src={item.menu_image}
               alt="menu_image"
-              className={`w-[8rem]  ${
+              className={`w-[6rem] lg:w-[7rem]  ${
                 category === item.menu_name
                   ? "border-4 border-[tomato] p-[3px] rounded-full"
                   : ""

@@ -1,4 +1,4 @@
-import React, { useContext, } from "react";
+import React, { useContext } from "react";
 import add_icon_white from "../assets/add_icon_white.png";
 import rating_stars from "../assets/rating_starts.png";
 import add_icon_green from "../assets/add_icon_green.png";
@@ -12,7 +12,11 @@ const Food_Item = ({ item }) => {
   return (
     <>
       <div className="relative">
-        <img src={item.image} className="w-[19rem] rounded-t-lg" alt="" />
+        <img
+          src={item.image}
+          className=" w-[17rem] sm:w-[20rem] md:w-[17rem] lg:w-[19rem] rounded-t-lg"
+          alt="itemImage"
+        />
         {!cartItems[item._id] ? (
           <img
             onClick={() => addToCart(item._id)}

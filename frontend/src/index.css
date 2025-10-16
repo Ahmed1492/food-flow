@@ -1,8 +1,11 @@
 @import "tailwindcss";
 
+* {
+  scroll-behavior: smooth;
+}
 .bg-header {
-  width: 100%;
-  height: 74vh;
+  /* width: 100%; */
+  /* height: 74vh; */
   background: linear-gradient(
       to left,
       rgb(189, 48, 23),
@@ -12,12 +15,14 @@
     ),
     url(/src/assets/header_img.png);
   background-repeat: no-repeat;
-  background-size: cover;
   background-position: center 124%;
+
+  background-size: cover;
   border-radius: 22px;
   margin-top: 1rem;
   color: #fff;
 }
+
 .bg-header div {
   animation: fadeIn, 3s;
   -webkit-animation: fadeIn 2.1s;
@@ -30,6 +35,10 @@
   animation: fadeIn 1s;
 }
 
+.bg-black-light {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
 #food-display {
   animation: fadeIn 2s;
 }
@@ -39,5 +48,13 @@
   }
   100% {
     opacity: 1;
+  }
+}
+
+@media (max-width: 700px) {
+  .bg-header {
+    /* display: none; */
+    /* background-position: center !important; */
+    background-position: unset !important;
   }
 }

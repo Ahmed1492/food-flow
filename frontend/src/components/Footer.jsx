@@ -6,12 +6,15 @@ import linkedin_icon from "../assets/linkedin_icon.png";
 
 const Footer = () => {
   return (
-    <div className="bg-[#313131] text-white pt-[4rem] pb-[1rem]  mt-[3rem] ">
-      <div className=" flex items-start justify-around">
+    <div
+      id="footer"
+      className="bg-[#313131] text-white pt-[4rem] pb-[1rem]  mt-[3rem] "
+    >
+      <div className=" flex flex-col text-sm md:text-base gap-y-8 md:flex-row items-center text-center md:text-left md:items-start  justify-center md:justify-around">
         {/* LEFT */}
-        <div className="flex flex-col  gap-3.5">
-          <img src={logo} alt="logo" className="w-[10rem]" />
-          <p className="max-w-[30rem] ">
+        <div className="flex justify-center items-center md:justify-start md:items-start flex-col gap-y-8 gap-3.5">
+          <img src={logo} alt="logo" className="w-[7rem] md:w-[10rem]" />
+          <p className=" max-w-[90%] sm:max-w-[30rem] ">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde
             repudiandae quisquam corporis recusandae deleniti velit porro
             exercitationem, ipsam ratione dolor et. Omnis consequuntur vero
@@ -51,7 +54,7 @@ const Footer = () => {
         </div>
       </div>
       <hr className="my-[2rem] bg-[#e2e2e2]  h-[1px] w-[80%] m-auto border-none " />
-      <p className="text-center text-[#e2e2e2]">
+      <p className="text-center text-sm md:text-base text-[#e2e2e2]">
         Copyright 2025 @Tomato.com - All Right Reserved.
       </p>
     </div>
