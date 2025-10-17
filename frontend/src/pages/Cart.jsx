@@ -1,10 +1,16 @@
 import React, { useContext } from "react";
 import { StoreContext } from "../context/StoreContext";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
-  const { food_list, cartItems, removeFromCart } = useContext(StoreContext);
+  const { food_list, cartItems, removeFromCart, cartTotal } =
+    useContext(StoreContext);
   console.log("food_list ,", food_list);
   console.log("cart items ,", cartItems);
+  let total = cartTotal();
+  let deliveryFee = total > 0 ? 2 : 0;
+
+  const navigate = useNavigate();
 
   return (
     <div className="px-[7%] md:px-[12%] pt-8 min-h-[43vh] text-sm lg:text-base">
@@ -53,27 +59,30 @@ const Cart = () => {
         })}
       </div>
 
-      <div className="mt-[3rem] flex flex-col gap-y-[3rem] justify-center items-center md:flex-row md:items-center md:justify-between text-sm lg:text-base">
+      <div className="mt-[3rem] flex flex-col-reverse gap-y-[3rem] justify-center items-center md:flex-row md:items-center md:justify-between text-sm lg:text-base">
         {/* LEFT */}
         <div className=" w-[80%] md:w-[40%] ">
           <h2 className="text-2xl font-semibold">Cart Total</h2>
           <div className="flex items-center justify-between mt-[2rem]">
             <p className="text-gray-500">Subtotal</p>
-            <p className="text-gray-500">$0</p>
+            <p className="text-gray-500">${total}</p>
           </div>
           <hr className="my-4 border-gray-200" />
           <div className="flex items-center justify-between">
             <p className="text-gray-500">Delivery Fee</p>
-            <p className="text-gray-500">$2</p>
+            <p className="text-gray-500">${deliveryFee}</p>
           </div>
           <hr className="my-4 border-gray-200" />
           <div className="flex items-center justify-between">
             <p className="text-gray-600 font-medium">Total</p>
-            <p className="text-gray-600 font-medium">$2</p>
+            <p className="text-gray-600 font-medium">${total + deliveryFee}</p>
           </div>
           <hr className="my-4 border-gray-200" />
           <div className="flex items-center justify-center md:block">
-            <button className="bg-red-400  text-white px-[2rem]  py-[11px] rounded-lg mt-2">
+            <button
+              onClick={() => navigate("/order")}
+              className="bg-red-400  text-white px-[2rem] cursor-pointer  py-[11px] rounded-lg mt-2"
+            >
               PROCEED TO CHECKOUT
             </button>
           </div>
@@ -89,7 +98,7 @@ const Cart = () => {
               placeholder="promo Code"
               className="py-[11px] px-5 rounded-s-lg bg-slate-200 w-[100%] outline-0"
             />
-            <button className="bg-black text-white  md:w-[30%]  lg:w-[20%] px-[20px] py-[11px] rounded-lg absolute right-0 ">
+            <button className="bg-black text-white  md:w-[30%] cursor-pointer lg:w-[20%] px-[20px] py-[11px] rounded-lg absolute right-0 ">
               Submit
             </button>
           </div>

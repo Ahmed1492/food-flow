@@ -14,12 +14,12 @@ const MobileApp = () => {
         <img
           src={play_store}
           alt="play_store"
-          className="w-[7rem] sm:w-[8rem] md:w-[12rem] cursor-pointer"
+          className="w-[7rem] sm:w-[8rem] md:w-[12rem] cursor-pointer hover:scale-110 duration-300"
         />
         <img
           src={app_store}
           alt="play_store"
-          className="w-[7rem] sm:w-[8rem] md:w-[12rem] cursor-pointer"
+          className="w-[7rem] sm:w-[8rem] md:w-[12rem] cursor-pointer hover:scale-110 duration-300"
         />
       </div>
     </div>

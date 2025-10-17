@@ -17,6 +17,14 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/order" element={<PlaceOrder />} />
+        <Route
+          path="*"
+          element={
+            <div className=" text-3xl py-3  min-h-[41vh] px-[7%]  ">
+              <h2 className="mt-[3rem] ">404 Not Found Page</h2>
+            </div>
+          }
+        />
       </Routes>
       <Footer />
     </div>

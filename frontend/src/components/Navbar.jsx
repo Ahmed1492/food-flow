@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { assets } from "../assets/assets";
 import { Link, useNavigate } from "react-router-dom";
+import { StoreContext } from "../context/StoreContext";
 const Navbar = ({ setIsLogin }) => {
   const [menu, setMenu] = useState("home");
   const navigate = useNavigate();
+  const { cartItems } = useContext(StoreContext);
   return (
     <div className="flex items-center  text-[#49557e] justify-between px-[8%] py-5">
       <img
@@ -65,7 +67,9 @@ const Navbar = ({ setIsLogin }) => {
             src={assets.basket_icon}
             alt="basket_icon}"
           />
-          <span className="absolute w-2 h-2 sm:w-3 sm:h-3 bg-red-400 -top-2 -right-2 rounded-full"></span>
+          {Object.keys(cartItems).length !== 0 && (
+            <span className="absolute w-2 h-2 sm:w-3 sm:h-3 bg-red-400 -top-2 -right-2 rounded-full"></span>
+          )}
         </Link>
         <button
           onClick={() => setIsLogin(true)}
