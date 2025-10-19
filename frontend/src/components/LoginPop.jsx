@@ -1,7 +1,44 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import axios from "axios";
+import { StoreContext } from "../context/StoreContext";
 
 const LoginPop = ({ setIsLogin }) => {
+  const { url, setToken } = useContext(StoreContext);
   const [loginState, setLoginState] = useState("login");
+  const [data, setData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  const collectData = (e) => {
+    let keys = e.target.name;
+    let values = e.target.value;
+    setData((data) => ({ ...data, [keys]: values }));
+    console.log(data);
+  };
+
+  const handleAuth = async (e) => {
+    e.preventDefault();
+    try {
+      let myResponse = await axios.post(
+        `${url}/api/auth/${loginState == "login" ? "login" : "register"}`,
+        data
+      );
+      console.log(myResponse.data);
+      if (myResponse.data.success) {
+        setToken(myResponse.data.token);
+        // save token to local storage
+        localStorage.setItem("food_flow_token", myResponse.data.token);
+        setIsLogin(false);
+      } else {
+        alert(myResponse.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="fixed left-0 right-0 top-0 fadeIn  bottom-0 bg-black-light flex  items-center justify-center z-50 ">
       <form className="bg-white px-4 pt-4 pb-5  w-max rounded-lg" action="">
@@ -23,26 +60,39 @@ const LoginPop = ({ setIsLogin }) => {
               className="bg-transparent border border-gray-300 outline-0 rounded-lg py-2 px-3 w-full"
               type="text"
               placeholder="Your name"
+              name="name"
+              value={data.name}
+              onChange={collectData}
             />
           )}
           <input
             className="bg-transparent border border-gray-300 outline-0 rounded-lg py-2 px-3 w-full"
             type="text"
             placeholder="Your email"
+            name="email"
+            value={data.email}
+            onChange={collectData}
           />
           <input
             className="bg-transparent border border-gray-300 outline-0 rounded-lg py-2 px-3 w-full"
             type="text"
             placeholder="Password"
+            name="password"
+            value={data.password}
+            onChange={collectData}
           />
 
-          <button className="bg-[tomato] py-2 text-white rounded-lg w-full">
+          <button
+            onClick={handleAuth}
+            className="bg-[tomato] py-2 text-white rounded-lg w-full cursor-pointer"
+          >
             {loginState !== "login" ? "Create account" : "Login"}
           </button>
           <div className="flex justify-start items-start w-full   gap-2">
             <input className="mt-1" type="checkbox" />
             <p className="text-[15px] text-gray-500 items-start ">
-              By continuing, I agree to the terms of use & <br /> privacy policy.
+              By continuing, I agree to the terms of use & <br /> privacy
+              policy.
             </p>
           </div>
         </div>

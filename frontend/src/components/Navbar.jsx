@@ -5,7 +5,7 @@ import { StoreContext } from "../context/StoreContext";
 const Navbar = ({ setIsLogin }) => {
   const [menu, setMenu] = useState("home");
   const navigate = useNavigate();
-  const { cartItems } = useContext(StoreContext);
+  const { cartItems, token, setToken } = useContext(StoreContext);
   return (
     <div className="flex items-center  text-[#49557e] justify-between px-[8%] py-5">
       <img
@@ -71,12 +71,41 @@ const Navbar = ({ setIsLogin }) => {
             <span className="absolute w-2 h-2 sm:w-3 sm:h-3 bg-red-400 -top-2 -right-2 rounded-full"></span>
           )}
         </Link>
-        <button
-          onClick={() => setIsLogin(true)}
-          className="border border-gray-400 text-sm md:text-base rounded-full px-[18px] lg:px-[28px] py-2 cursor-pointer hover:bg-[#fff4f2] duration-300"
-        >
-          sign in
-        </button>
+        {token ? (
+          <div className="relative ">
+            <img
+              className="cursor-pointer w-4  sm:w-5"
+              src={assets.profile_icon}
+              alt="profile_icon}"
+            />
+            <ul className="absolute w-[10rem] p-3 rounded-md bg-red-200 flex flex-col gap-3 -left-20 -bottom-[6rem] z-50">
+              <li className="flex items-center gap-3 cursor-pointer hover:text-red-400">
+                <img
+                  className="cursor-pointer w-4  sm:w-5"
+                  src={assets.bag_icon}
+                  alt="profile_icon}"
+                />
+                <p>profile</p>
+              </li>
+              <hr className="border-red-300" />
+              <li className="flex items-center gap-3 cursor-pointer hover:text-red-400">
+                <img
+                  className="cursor-pointer w-4  sm:w-5"
+                  src={assets.logout_icon}
+                  alt="profile_icon}"
+                />
+                <p>logout</p>
+              </li>
+            </ul>
+          </div>
+        ) : (
+          <button
+            onClick={() => setIsLogin(true)}
+            className="border border-gray-400 text-sm md:text-base rounded-full px-[18px] lg:px-[28px] py-2 cursor-pointer hover:bg-[#fff4f2] duration-300"
+          >
+            sign in
+          </button>
+        )}
       </div>
     </div>
   );

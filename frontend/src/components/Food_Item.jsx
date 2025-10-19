@@ -5,7 +5,7 @@ import add_icon_green from "../assets/add_icon_green.png";
 import remove_icon_red from "../assets/remove_icon_red.png";
 import { StoreContext } from "../context/StoreContext";
 
-const Food_Item = ({ item }) => {
+const Food_Item = ({ item, url }) => {
   const { cartItems, addToCart, removeFromCart } = useContext(StoreContext);
   // console.log("item ", item);
 
@@ -13,7 +13,7 @@ const Food_Item = ({ item }) => {
     <>
       <div className="relative">
         <img
-          src={item.image}
+          src={`${url}/images/${item.image}`}
           className=" w-[17rem] sm:w-[20rem] md:w-[17rem] lg:w-[19rem] rounded-t-lg"
           alt="itemImage"
         />
