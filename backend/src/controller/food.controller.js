@@ -34,6 +34,7 @@ export const getFoods = async (req, res) => {
 
 // remove food item
 export const removeFood = async (req, res) => {
+
   try {
     let { id } = req.body;
     let itemById = await Food.findById(id);

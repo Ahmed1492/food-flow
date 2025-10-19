@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-const Orders = ({ setCurrentPage }) => {
+const Orders = ({ setCurrentPage , }) => {
   const location = useLocation();
   let path = location.pathname;
   console.log(location.pathname);

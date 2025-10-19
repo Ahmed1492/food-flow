@@ -3,8 +3,8 @@ import order_icon from "../assets/order_icon.png";
 import { Link } from "react-router-dom";
 const Sidebar = ({ currenPage, setCurrentPage }) => {
   return (
-    <div className="border-r-2 min-h-[70vh] border-slate-300 ">
-      <div className="pt-[3rem] ps-[3rem] flex flex-col gap-6">
+    <div className="border-r-2 min-h-[70vh] border-slate-300 relative   ">
+      <div className="pt-[3rem] ps-[3rem] flex flex-col gap-6 sticky top-7">
         {/* Add Items */}
         <Link
           onClick={() => setCurrentPage("add-items")}
