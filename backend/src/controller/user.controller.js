@@ -24,31 +24,44 @@ export const getAllUsers = async (req, res, next) => {
 // register
 export const register = async (req, res, next) => {
   try {
-    let { name, email, password } = req.body;
-    // check user exist
-    let checkEmailExist = await User.findOne({ email });
-    if (checkEmailExist) {
-      return res.json({ success: false, message: 'email already used' });
-    }
-    // check email is valid
+    const { name, email, password } = req.body;
+
+    // validate email
     if (!validator.isEmail(email)) {
-      return res.json({ success: false, message: 'email not valid' });
+      return res.json({ success: false, message: 'Invalid email address' });
     }
-    // check password is valid
+
+    // check if user already exists
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.json({ success: false, message: 'Email already in use' });
+    }
+
+    // validate password
     if (password.length < 8) {
-      return res.json({ success: false, message: 'enter a strong password' });
+      return res.json({ success: false, message: 'Password must be at least 8 characters' });
     }
-    // hashing user Password
-    const hashedPassword = await bcrypt.hash(password, process.env.BYCRIP_SALT_ROUNDS);
-    // create new user 
+
+    // hash password
+    const saltRounds = parseInt(process.env.BYCRIP_SALT_ROUNDS);
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+    // create new user
     const newUser = await User.create({ name, email, password: hashedPassword });
 
-    // create token 
-    let token = await createToken(newUser._id);
-    return res.json({ success: true, message: 'user created successfully', user: newUser, token });
+    // create token
+    const token = createToken(newUser._id, process.env.JWT_SECRET_KEY);
+
+    return res.json({
+      success: true,
+      message: 'User registered successfully',
+      user: { id: newUser._id, name: newUser.name, email: newUser.email },
+      token
+    });
+
   } catch (error) {
-    console.log(error);
-    return res.json({ success: false, message: "some thing went wrong", err: error.message });
+    console.error(error);
+    return res.json({ success: false, message: 'Something went wrong', err: error.message });
   }
 };
 
