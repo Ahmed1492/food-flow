@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
 import { StoreContext } from "../context/StoreContext";
 import { useNavigate } from "react-router-dom";
+import Loading from "../components/Loading";
 
 const Cart = () => {
-  const { food_list, cartItems, removeFromCart, cartTotal , data , url  } =
+  const { food_list, cartItems, removeFromCart, cartTotal, data, url } =
     useContext(StoreContext);
   console.log("food_list ,", food_list);
   console.log("cart items ,", cartItems);
@@ -11,7 +12,9 @@ const Cart = () => {
   let deliveryFee = total > 0 ? 2 : 0;
 
   const navigate = useNavigate();
-
+  // if (!cartItems) {
+  //   return <Loading />;
+  // }
   return (
     <div className="px-[7%] md:px-[12%] pt-8 min-h-[43vh] text-sm lg:text-base">
       {/* Header Row */}
@@ -28,35 +31,39 @@ const Cart = () => {
 
       {/* Items */}
       <div className="flex flex-col gap-3">
-        {data.map((item, index) => {
-          if (cartItems[item._id] > 0) {
-            return (
-              <React.Fragment key={item._id || index}>
-                <div className="flex items-center justify-between">
-                  <img
-                    src={`${url}/images/${item.image}`}
-                    alt={item.name}
-                    className="w-16 rounded-md"
-                  />
-                  <p className="w-28  text-center">{item.name}</p>
-                  <p className="w-28  text-center">${item.price}</p>
-                  <p className="w-28  text-center">{cartItems[item._id]}</p>
-                  <p className="w-28  text-center">
-                    ${item.price * (cartItems[item._id] || 1)}
-                  </p>
-                  <button
-                    className="w-28  text-center text-red-500 cursor-pointer hover:text-red-700"
-                    onClick={() => removeFromCart(item._id)}
-                  >
-                    ×
-                  </button>
-                </div>
+        {cartItems ? (
+          data.map((item, index) => {
+            if (cartItems[item._id] > 0) {
+              return (
+                <React.Fragment key={item._id || index}>
+                  <div className="flex items-center justify-between">
+                    <img
+                      src={`${url}/images/${item.image}`}
+                      alt={item.name}
+                      className="w-16 rounded-md"
+                    />
+                    <p className="w-28  text-center">{item.name}</p>
+                    <p className="w-28  text-center">${item.price}</p>
+                    <p className="w-28  text-center">{cartItems[item._id]}</p>
+                    <p className="w-28  text-center">
+                      ${item.price * (cartItems[item._id] || 1)}
+                    </p>
+                    <button
+                      className="w-28  text-center text-red-500 cursor-pointer hover:text-red-700"
+                      onClick={() => removeFromCart(item._id)}
+                    >
+                      ×
+                    </button>
+                  </div>
 
-                <hr className="border-gray-200" />
-              </React.Fragment>
-            );
-          }
-        })}
+                  <hr className="border-gray-200" />
+                </React.Fragment>
+              );
+            }
+          })
+        ) : (
+          <Loading />
+        )}
       </div>
 
       <div className="mt-[3rem] flex flex-col-reverse gap-y-[3rem] justify-center items-center md:flex-row md:items-center md:justify-between text-sm lg:text-base">

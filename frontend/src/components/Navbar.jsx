@@ -6,12 +6,13 @@ const Navbar = ({ setIsLogin }) => {
   const [menu, setMenu] = useState("home");
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const navigate = useNavigate();
-  const { cartItems, token, setToken } = useContext(StoreContext);
+  const { cartItems, token, setToken, setCartItems } = useContext(StoreContext);
   const logout = () => {
     setToken("");
     if (localStorage.getItem("food_flow_token")) {
       localStorage.removeItem("food_flow_token");
     }
+    setCartItems({});
     navigate("/");
   };
   return (
@@ -75,7 +76,7 @@ const Navbar = ({ setIsLogin }) => {
             src={assets.basket_icon}
             alt="basket_icon}"
           />
-          {Object.keys(cartItems).length !== 0 && (
+          {cartItems && Object?.keys(cartItems).length !== 0 && (
             <span className="absolute w-2 h-2 sm:w-3 sm:h-3 bg-red-400 -top-2 -right-2 rounded-full"></span>
           )}
         </Link>

@@ -11,13 +11,14 @@ const Food_Item = ({ item, url }) => {
 
   return (
     <>
+      {}
       <div className="relative">
         <img
           src={`${url}/images/${item.image}`}
           className=" w-[17rem] sm:w-[20rem] md:w-[17rem] lg:w-[19rem] rounded-t-lg"
           alt="itemImage"
         />
-        {!cartItems[item._id] ? (
+        {cartItems && !cartItems[item._id] ? (
           <img
             onClick={() => addToCart(item._id)}
             src={add_icon_white}
@@ -33,7 +34,7 @@ const Food_Item = ({ item, url }) => {
               alt="add_icon"
             />
             <span className=" text-black  flex items-center justify-center font-semibold rounded-full">
-              {cartItems[item._id]}
+              {cartItems && cartItems[item._id]}
             </span>
 
             <img
