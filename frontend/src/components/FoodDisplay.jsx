@@ -1,11 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import axios from "axios";
 import StoreContextProvider, { StoreContext } from "../context/StoreContext";
 import Food_Item from "./Food_Item";
 const FoodDisplay = ({ category }) => {
-  const { food_list , url } = useContext(StoreContext);
+  const {   url , data ,setData } = useContext(StoreContext);
   // console.log("food_list ", food_list);
-  const [data, setData] = useState([]);
   const getFoods = async () => {
     try {
       let myResponse = await axios.get(`${url}/api/food/get`);

@@ -3,7 +3,7 @@ import { StoreContext } from "../context/StoreContext";
 import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
-  const { food_list, cartItems, removeFromCart, cartTotal } =
+  const { food_list, cartItems, removeFromCart, cartTotal , data , url  } =
     useContext(StoreContext);
   console.log("food_list ,", food_list);
   console.log("cart items ,", cartItems);
@@ -28,13 +28,13 @@ const Cart = () => {
 
       {/* Items */}
       <div className="flex flex-col gap-3">
-        {food_list.map((item, index) => {
+        {data.map((item, index) => {
           if (cartItems[item._id] > 0) {
             return (
               <React.Fragment key={item._id || index}>
                 <div className="flex items-center justify-between">
                   <img
-                    src={item.image}
+                    src={`${url}/images/${item.image}`}
                     alt={item.name}
                     className="w-16 rounded-md"
                   />

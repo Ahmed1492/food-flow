@@ -4,8 +4,16 @@ import { Link, useNavigate } from "react-router-dom";
 import { StoreContext } from "../context/StoreContext";
 const Navbar = ({ setIsLogin }) => {
   const [menu, setMenu] = useState("home");
+  const [isOpenMenu, setIsOpenMenu] = useState(false);
   const navigate = useNavigate();
   const { cartItems, token, setToken } = useContext(StoreContext);
+  const logout = () => {
+    setToken("");
+    if (localStorage.getItem("food_flow_token")) {
+      localStorage.removeItem("food_flow_token");
+    }
+    navigate("/");
+  };
   return (
     <div className="flex items-center  text-[#49557e] justify-between px-[8%] py-5">
       <img
@@ -74,29 +82,35 @@ const Navbar = ({ setIsLogin }) => {
         {token ? (
           <div className="relative ">
             <img
+              onClick={() => setIsOpenMenu((prev) => !prev)}
               className="cursor-pointer w-4  sm:w-5"
               src={assets.profile_icon}
               alt="profile_icon}"
             />
-            <ul className="absolute w-[10rem] p-3 rounded-md bg-red-200 flex flex-col gap-3 -left-20 -bottom-[6rem] z-50">
-              <li className="flex items-center gap-3 cursor-pointer hover:text-red-400">
-                <img
-                  className="cursor-pointer w-4  sm:w-5"
-                  src={assets.bag_icon}
-                  alt="profile_icon}"
-                />
-                <p>profile</p>
-              </li>
-              <hr className="border-red-300" />
-              <li className="flex items-center gap-3 cursor-pointer hover:text-red-400">
-                <img
-                  className="cursor-pointer w-4  sm:w-5"
-                  src={assets.logout_icon}
-                  alt="profile_icon}"
-                />
-                <p>logout</p>
-              </li>
-            </ul>
+            {isOpenMenu && (
+              <ul className="absolute w-[9rem] p-3 rounded-md bg-red-100 flex flex-col gap-3 -left-20 -bottom-[6rem] text-black  z-50">
+                <li className="flex items-center gap-3 cursor-pointer hover:text-red-400">
+                  <img
+                    className="cursor-pointer w-4  sm:w-5"
+                    src={assets.bag_icon}
+                    alt="profile_icon}"
+                  />
+                  <p>order</p>
+                </li>
+                <hr className="border-red-300" />
+                <li
+                  onClick={logout}
+                  className="flex items-center gap-3 cursor-pointer hover:text-red-400"
+                >
+                  <img
+                    className="cursor-pointer w-4  sm:w-5"
+                    src={assets.logout_icon}
+                    alt="profile_icon}"
+                  />
+                  <p>logout</p>
+                </li>
+              </ul>
+            )}
           </div>
         ) : (
           <button
