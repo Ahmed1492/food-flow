@@ -36,9 +36,9 @@ export const removeFromCart = async (req, res, next) => {
     //  If item not in cart, remove it with quantity = 1
     if (cartData[itemId]) {
       cartData[itemId] -= 1;
-    }
-    if (cartData[itemId] === 0) {
-      cartData = {};
+      if (cartData[itemId] === 0) {
+        delete cartData[itemId];
+      }
     }
     await User.findByIdAndUpdate(userId, { cartData });
     return res.json({ success: true, cartData, user, message: 'removed from cart' });
