@@ -30,13 +30,15 @@ export const StoreContextProvider = ({ children }) => {
   };
   const cartTotal = () => {
     let totalAmount = 0;
-    for (const item in cartItems) {
-      if (cartItems[item] > 0) {
-        let itemInfo = data.find((i) => i._id === item);
-        totalAmount += itemInfo.price * cartItems[item];
+    if (cartItems) {
+      for (const item in cartItems) {
+        if (cartItems[item] > 0) {
+          let itemInfo = data.find((i) => i._id === item);
+          totalAmount += itemInfo.price * cartItems[item];
+        }
       }
+      return totalAmount;
     }
-    return totalAmount;
   };
 
   // --------------------------- clinet --------------------------------

@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
-import axios from "axios";
+import React, { useContext } from "react";
 import StoreContextProvider, { StoreContext } from "../context/StoreContext";
 import Food_Item from "./Food_Item";
 const FoodDisplay = ({ category }) => {

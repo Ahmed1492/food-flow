@@ -4,6 +4,7 @@ import { connectDB } from './db/connection.js';
 import foodRouter from './src/router/food.router.js';
 import userRouter from './src/router/user.router.js';
 import cartRouter from './src/router/cart.router.js';
+import orderRouter from './src/router/order.router.js';
 import "dotenv/config";
 
 
@@ -22,6 +23,7 @@ app.use('/api/food', foodRouter);
 app.use('/images', express.static('src/uploads'));
 app.use('/api/auth', userRouter);
 app.use('/api/cart', cartRouter);
+app.use('/api/order', orderRouter);
 
 
 
@@ -31,4 +33,6 @@ connectDB();
 // listen {test server}
 app.listen(port, () => {
   console.log(`app is listen on port ${port}`);
+  
+
 });
