@@ -41,9 +41,12 @@ const App = () => {
           />
           <Route
             path="/orders"
-            url={url}
             element={
-              <Orders urrenPage={currenPage} setCurrentPage={setCurrentPage} />
+              <Orders
+                url={url}
+                urrenPage={currenPage}
+                setCurrentPage={setCurrentPage}
+              />
             }
           />
         </Routes>

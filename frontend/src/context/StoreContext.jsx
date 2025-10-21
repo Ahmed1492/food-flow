@@ -66,7 +66,7 @@ export const StoreContextProvider = ({ children }) => {
         }
       );
       await fetchCardData();
-      console.log(myResponse.data);
+      // console.log(myResponse.data);
     } catch (error) {
       console.log(error);
     }
@@ -84,7 +84,7 @@ export const StoreContextProvider = ({ children }) => {
         }
       );
       await fetchCardData();
-      console.log(myResponse.data);
+      // console.log(myResponse.data);
     } catch (error) {
       console.log(error);
     }
@@ -97,9 +97,9 @@ export const StoreContextProvider = ({ children }) => {
           token: token,
         },
       });
-      console.log("cart items ", myResponse.data.userCart);
+      // console.log("cart items ", myResponse.data.userCart);
       setCartItems(myResponse?.data?.userCart);
-      console.log("cart ", cartItems);
+      // console.log("cart ", cartItems);
     } catch (error) {
       console.log(error);
     }

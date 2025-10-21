@@ -90,8 +90,9 @@ const Navbar = ({ setIsLogin }) => {
             />
             {isOpenMenu && (
               <ul className="absolute w-[9rem] p-3 rounded-md bg-red-100 flex flex-col gap-3 -left-20 -bottom-[6rem] text-black  z-50">
-                <li className="flex items-center gap-3 cursor-pointer hover:text-red-400">
+                <li onClick={() => navigate("/my-orders")} className="flex items-center gap-3 cursor-pointer hover:text-red-400">
                   <img
+                    
                     className="cursor-pointer w-4  sm:w-5"
                     src={assets.bag_icon}
                     alt="profile_icon}"

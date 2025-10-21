@@ -67,6 +67,36 @@ export const verifyOder = async (req, res, next) => {
     return res.json({ success: false, err: error.message });
 
   }
-}
+};
+
+// get all orders {admin}
+export const getOrders = async (req, res, next) => {
+  try {
+
+    const orders = await Order.find({});
+    return res.json({ success: true, orders: orders });
+  } catch (error) {
+    console.log(error);
+    return res.json({ success: false, err: error.message });
+
+  }
+};
+
+// get user orders {front-end}
+export const getUserOrders = async (req, res, next) => {
+  try {
+    const userId = req.userId;
+    if (!userId) {
+      return res.json({ success: false, message: 'login first ' });
+    }
+    const userOrders = await Order.find({ userId });
+    return res.json({ success: true, orders: userOrders });
+  } catch (error) {
+    console.log(error);
+    return res.json({ success: false, err: error.message });
+
+  }
+};
+
 
 
