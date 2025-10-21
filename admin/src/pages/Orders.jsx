@@ -17,6 +17,20 @@ const Orders = ({ setCurrentPage, url }) => {
       console.log(error);
     }
   };
+
+  const updateOrderStatus = async (orderId, status) => {
+    // console.log(orderId, status);
+    try {
+      let myResponse = await axios.put(`${url}/api/order/update-status`, {
+        orderId,
+        status,
+      });
+      console.log(myResponse.data);
+      await getUserOrders();
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
     getUserOrders();
   }, []);
@@ -69,6 +83,7 @@ const Orders = ({ setCurrentPage, url }) => {
               </p>
               <p>Items : {order.items.length || 0}</p>
               <select
+                onChange={(e) => updateOrderStatus(order._id, e.target.value)}
                 className="px-4 outline-none py-4 border border-red-300 bg-red-100 rounded-md h-max"
                 defaultValue={order.status}
               >

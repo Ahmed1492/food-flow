@@ -31,10 +31,10 @@ const MyOrders = () => {
       {userOrders.map((order, index) => (
         <div
           key={index}
-          className="flex items-center gap-4 border border-gray-500 rounded-sm text-gray-700  p-4 h-max w-full "
+          className="flex items-start gap-4 border border-gray-500 rounded-sm text-gray-700  p-4 h-max w-full "
         >
           <img src={parcel_icon} alt="parcel_icon" className="w-14" />
-          <div className="flex items-center justify-between w-full">
+          <div className="flex items-start justify-between w-full">
             <div className="w-[18rem] flex flex-wrap">
               <p className="">
                 {order.items.map((i) => `${i.name} x${i.quantity}`).join(", ")}
@@ -49,7 +49,10 @@ const MyOrders = () => {
               <span className="w-2 h-2 bg-[tomato]   rounded-full"></span>
               {order.status}
             </p>
-            <button className="bg-red-200 px-6 text-gray-700 py-3 cursor-pointer rounded-md">
+            <button
+              onClick={getUserOrders}
+              className="bg-red-200 px-6 text-gray-700 py-3 cursor-pointer rounded-md"
+            >
               Track Order
             </button>
           </div>

@@ -99,4 +99,23 @@ export const getUserOrders = async (req, res, next) => {
 };
 
 
+// update order status {admin}
+export const OrderupdateStatus = async (req, res, next) => {
+  try {
+    const { orderId, status } = req.body;
+    if (!orderId) {
+      return res.json({ success: false, message: 'some thing went wrong' });
+    }
+    if (!status) {
+      return res.json({ success: false, message: 'no status found' });
+    }
+    const orderUpdateStatus = await Order.findByIdAndUpdate(orderId, { status });
+    return res.json({ success: true, order: orderUpdateStatus });
+
+  } catch (error) {
+    console.log(error);
+    return res.json({ success: false, err: error.message });
+
+  }
+}
 
