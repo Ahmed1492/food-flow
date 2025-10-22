@@ -11,6 +11,7 @@ export const StoreContextProvider = ({ children }) => {
   const [token, setToken] = useState("");
   const [data, setData] = useState([]);
   const [userData, setUserData] = useState({});
+  const [foodLoading, setFoodLoading] = useState(false);
   // --------------------------- clinet --------------------------------
   const addToCart = async (itemId) => {
     if (!cartItems[itemId]) {
@@ -18,12 +19,16 @@ export const StoreContextProvider = ({ children }) => {
     } else {
       setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
     }
+    console.log("itemId added:", itemId);
+
     if (token) {
       await addToCartServer(itemId);
     }
   };
   const removeFromCart = async (itemId) => {
     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
+    console.log("itemId removed:", itemId);
+
     if (token) {
       await removeFromCartServer(itemId);
     }
@@ -46,11 +51,14 @@ export const StoreContextProvider = ({ children }) => {
   // --------------------------- server --------------------------------
   const getFoods = async () => {
     try {
+      setFoodLoading(true);
       let myResponse = await axios.get(`${url}/api/food/get`);
       // console.log(myResponse.data.food);
       setData(myResponse.data.food);
     } catch (error) {
       console.log(error);
+    } finally {
+      setFoodLoading(false);
     }
   };
 
@@ -113,7 +121,7 @@ export const StoreContextProvider = ({ children }) => {
       });
       setUserData(myResponse.data.user);
 
-      console.log(myResponse.data.user);
+      // console.log(myResponse.data.user);
     } catch (error) {
       console.log(error);
     }
@@ -134,7 +142,8 @@ export const StoreContextProvider = ({ children }) => {
     addToCartServer,
     removeFromCartServer,
     userData,
-    fetchUserData
+    fetchUserData,
+    foodLoading,
   };
 
   useEffect(() => {

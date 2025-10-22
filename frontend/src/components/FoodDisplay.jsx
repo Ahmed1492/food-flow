@@ -1,9 +1,20 @@
 import React, { useContext } from "react";
 import StoreContextProvider, { StoreContext } from "../context/StoreContext";
 import Food_Item from "./Food_Item";
+import SkeletonLoader from "./SkeletonCard";
+
 const FoodDisplay = ({ category }) => {
-  const { data, url } = useContext(StoreContext);
+  const { data, url, foodLoading } = useContext(StoreContext);
   // console.log("food_list ", food_list);
+  if (foodLoading) {
+    return (
+      <>
+        <SkeletonLoader />;
+        <SkeletonLoader />;
+        <SkeletonLoader />;
+      </>
+    );
+  }
 
   return (
     <div id="food-display">
@@ -14,7 +25,7 @@ const FoodDisplay = ({ category }) => {
           if (category === "All" || category === item.category)
             return (
               <div
-                className="flex  fadeIn flex-col gap-3  shadow-sm cursor-pointer relative"
+                className="flex fadeIn flex-col gap-3 shadow-sm cursor-pointer relative rounded-xl transition-all duration-300 hover:bg-gray-100"
                 key={index}
               >
                 <Food_Item item={item} url={url} />

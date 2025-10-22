@@ -21,8 +21,8 @@ const AddItems = ({ setCurrentPage, url }) => {
     let newObj = { ...data };
     newObj[keys] = values;
     setData(newObj);
-    console.log("data ", newObj);
-    console.log("image ", image);
+    // console.log("data ", newObj);
+    // console.log("image ", image);
     // setData((data) => ({ ...data, [keys]: values }));
   };
 

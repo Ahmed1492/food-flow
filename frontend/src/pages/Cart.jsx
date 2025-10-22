@@ -4,17 +4,15 @@ import { useNavigate } from "react-router-dom";
 import Loading from "../components/Loading";
 
 const Cart = () => {
-  const { food_list, cartItems, removeFromCart, cartTotal, data, url } =
+  const { cartItems, removeFromCart, cartTotal, data, url } =
     useContext(StoreContext);
-  console.log("food_list ,", food_list);
+  // console.log("food_list ,", food_list);
   console.log("cart items ,", cartItems);
   let total = cartTotal();
   let deliveryFee = total > 0 ? 2 : 0;
 
   const navigate = useNavigate();
-  // if (!cartItems) {
-  //   return <Loading />;
-  // }
+ 
   return (
     <div className="px-[7%] md:px-[12%] pt-8 min-h-[43vh] text-sm lg:text-base">
       {/* Header Row */}

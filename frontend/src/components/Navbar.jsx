@@ -3,7 +3,9 @@ import { assets } from "../assets/assets";
 import { Link, useNavigate } from "react-router-dom";
 import { StoreContext } from "../context/StoreContext";
 import axios from "axios";
-import profile_icon from "../assets/noAvatar2.png";
+import { toast } from "react-toastify";
+
+// import profile_icon from "../assets/noAvatar2.png";
 const Navbar = ({ setIsLogin }) => {
   const [menu, setMenu] = useState("home");
   const [isOpenMenu, setIsOpenMenu] = useState(false);
@@ -46,8 +48,9 @@ const Navbar = ({ setIsLogin }) => {
           headers: { token },
         }
       );
-
-      console.log(image ? "add" : "remove", myResponse.data);
+      toast.success(myResponse.data.message);
+      console.log(image ? `URL :${url}/images/${myResponse.data.image}` : "");
+      console.log(image ? "update image" : "removed  ", myResponse.data);
       await fetchUserData();
     } catch (error) {
       console.log(error);
@@ -58,54 +61,39 @@ const Navbar = ({ setIsLogin }) => {
   };
 
   return (
-    <div className="flex items-center  text-[#49557e] justify-between px-[8%] py-5 ">
+    <div className="flex items-center  text-[#49557e] justify-between px-[8%] py-5 sticky top-1 bg-white z-50 ">
       <img
         onClick={() => navigate("/")}
         className="w-[80px] sm:w-[150px] cursor-pointer"
         src={assets.logo}
         alt="logo"
       />
-      <div className="hidden md:flex flex-wrapa items-center text-[17px] duration-500 gap-4 lg:gap-8 ">
-        <Link
-          onClick={() => setMenu("home")}
-          className={`${
-            menu == "home" ? "border-b-[2px] border-[#49557e] " : "pb-[2px]"
-          }`}
-        >
-          home
-        </Link>
-        <a
-          href="#explore-menu"
-          onClick={() => setMenu("menu")}
-          className={`${
-            menu == "menu" ? "border-b-[2px] border-[#49557e] " : "pb-[2px]"
-          }`}
-        >
-          menu
-        </a>
-        <a
-          href="#app-download"
-          onClick={() => setMenu("mobile-app")}
-          className={`${
-            menu == "mobile-app"
-              ? "border-b-[2px] border-[#49557e] "
-              : "pb-[2px]"
-          }`}
-        >
-          mobile-app
-        </a>
-        <a
-          href="#footer"
-          onClick={() => setMenu("contact us")}
-          className={`${
-            menu == "contact us"
-              ? "border-b-[2px] border-[#49557e] "
-              : "pb-[2px]"
-          }`}
-        >
-          contact us
-        </a>
+      <div className="hidden md:flex items-center text-[17px] gap-6 lg:gap-10">
+        {[
+          { name: "home", href: "#" },
+          { name: "menu", href: "#explore-menu" },
+          { name: "mobile-app", href: "#app-download" },
+          { name: "contact us", href: "#footer" },
+        ].map((item) => (
+          <a
+            key={item.name}
+            href={item.href}
+            onClick={() => setMenu(item.name)}
+            className={`capitalize relative pb-[2px] transition-all duration-300 
+        ${
+          menu === item.name
+            ? "text-[#49557e] after:w-full"
+            : "text-gray-700 hover:text-[#49557e] after:w-0 hover:after:w-full"
+        }
+        after:absolute after:left-0 after:bottom-0 after:h-[2px] 
+        after:bg-[#49557e] after:transition-all after:duration-300
+      `}
+          >
+            {item.name}
+          </a>
+        ))}
       </div>
+
       <div className="flex items-center gap-4 sm:gap-8">
         <img
           className="cursor-pointer w-4  sm:w-5 lg:w-6"
@@ -127,14 +115,14 @@ const Navbar = ({ setIsLogin }) => {
             {userData?.image ? (
               <img
                 onClick={() => setIsOpenMenu((prev) => !prev)}
-                className="cursor-pointer w-[47px] h-[47px] object-cover rounded-full "
+                className="cursor-pointer w-[49px] h-[49px] object-cover rounded-full "
                 src={`${url}/images/${userData?.image}`}
                 alt="profile_icon}"
               />
             ) : (
               <img
                 onClick={() => setIsOpenMenu((prev) => !prev)}
-                className="cursor-pointer  w-[47px] h-[47px] bordear rounded-full border-blue-100  object-cover  "
+                className="cursor-pointer  w-[49px] h-[49px] bordear rounded-full border-blue-100  object-cover  "
                 src="https://cdn-icons-png.flaticon.com/512/847/847969.png"
                 alt="profile_icon}"
               />
@@ -157,10 +145,11 @@ const Navbar = ({ setIsLogin }) => {
                         className={`${"w-[4rem] h-[4rem]"} rounded-full object-cover`}
                       />
                       {!image && (
-                        <p className="text-gray-600">
+                        <p className="text-gray-600 hover:text-red-400 hover:underline transition-all duration-200 cursor-pointer">
                           {userData?.image ? "Update" : "Add Image"}
                         </p>
                       )}
+
                       <input
                         ref={fileInputRef}
                         onChange={(e) => setImage(e.target.files[0])}
@@ -179,7 +168,7 @@ const Navbar = ({ setIsLogin }) => {
                             updateUserImage();
                           }
                         }}
-                        className="text-red-600 cursor-pointer inline-block"
+                        className="text-red-600 cursor-pointer inline-block hover:text-red-700 hover:underline transition-all duration-200"
                       >
                         Remove
                       </button>
@@ -189,7 +178,7 @@ const Navbar = ({ setIsLogin }) => {
                       <div className="w-full flex gap-4">
                         <button
                           onClick={updateUserImage}
-                          className="bg-red-400 w-full py-[2px] px-2 rounded-md text-white"
+                          className="bg-red-400 w-full cursor-pointer py-[2px] px-2 rounded-md text-white hover:bg-red-500 hover:scale-[1.02] transition-all duration-300"
                         >
                           update
                         </button>
@@ -201,7 +190,7 @@ const Navbar = ({ setIsLogin }) => {
                               fileInputRef.current.value = "";
                             }
                           }}
-                          className="bg-red-400 font-bold text-sm p-2 rounded-full w-5 h-5 flex items-center justify-center text-white absolute top-0 -right-1 cursor-pointer"
+                          className="bg-red-400 font-bold text-sm p-2 rounded-full w-5 h-5 flex items-center justify-center text-white absolute top-0 -right-1 cursor-pointer hover:bg-red-500 hover:scale-110 transition-all duration-300"
                         >
                           X
                         </button>

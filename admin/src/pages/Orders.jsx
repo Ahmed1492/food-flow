@@ -11,7 +11,7 @@ const Orders = ({ setCurrentPage, url }) => {
   const getUserOrders = async () => {
     try {
       let myResponse = await axios.get(`${url}/api/order/orders`);
-      console.log(myResponse.data.orders[0]);
+      // console.log(myResponse.data.orders[0]);
       setUserOrders(myResponse.data.orders);
     } catch (error) {
       console.log(error);

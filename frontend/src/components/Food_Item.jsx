@@ -4,10 +4,11 @@ import rating_stars from "../assets/rating_starts.png";
 import add_icon_green from "../assets/add_icon_green.png";
 import remove_icon_red from "../assets/remove_icon_red.png";
 import { StoreContext } from "../context/StoreContext";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const Food_Item = ({ item, url }) => {
   const { cartItems, addToCart, removeFromCart } = useContext(StoreContext);
-  // console.log("item ", item);
 
   return (
     <>
@@ -18,30 +19,29 @@ const Food_Item = ({ item, url }) => {
           className=" w-[17rem] sm:w-[20rem] md:w-[17rem] lg:w-[19rem] rounded-t-lg"
           alt="itemImage"
         />
-        {cartItems && !cartItems[item._id] ? (
+        {!cartItems?.[item._id] ? (
           <img
             onClick={() => addToCart(item._id)}
             src={add_icon_white}
-            className="w-10 absolute bottom-2 right-3"
-            alt="add_icon_white"
+            className="w-10 absolute bottom-2 right-3 cursor-pointer transition-transform hover:scale-110"
+            alt="Add to cart"
           />
         ) : (
-          <div className="flex items-center gap-3 bg-white p-1 rounded-full absolute bottom-3 right-4 ">
+          <div className="flex items-center gap-3 bg-white p-2 rounded-full absolute bottom-3 right-4 shadow-md">
             <img
               onClick={() => removeFromCart(item._id)}
               src={remove_icon_red}
-              className="w-10  bottom-2 right-3"
-              alt="add_icon"
+              className="w-8 cursor-pointer transition-transform hover:scale-110"
+              alt="Remove item"
             />
-            <span className=" text-black  flex items-center justify-center font-semibold rounded-full">
-              {cartItems && cartItems[item._id]}
+            <span className="text-black font-semibold w-6 text-center select-none">
+              {cartItems[item._id]}
             </span>
-
             <img
               onClick={() => addToCart(item._id)}
               src={add_icon_green}
-              className="w-10  bottom-2 right-3"
-              alt="add_icon"
+              className="w-8 cursor-pointer transition-transform hover:scale-110"
+              alt="Add item"
             />
           </div>
         )}

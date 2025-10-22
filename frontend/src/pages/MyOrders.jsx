@@ -5,6 +5,8 @@ import { StoreContext } from "../context/StoreContext";
 import { useContext } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
+import { toast } from "react-toastify";
+
 const MyOrders = () => {
   const { url, token } = useContext(StoreContext);
   const [userOrders, setUserOrders] = useState([]);
@@ -13,7 +15,7 @@ const MyOrders = () => {
       let myResponse = await axios.get(`${url}/api/order/user-orders`, {
         headers: { token },
       });
-      console.log(myResponse.data.orders[0].items);
+      console.log(myResponse.data.orders);
       setUserOrders(myResponse.data.orders);
     } catch (error) {
       console.log(error);
@@ -22,9 +24,10 @@ const MyOrders = () => {
   useEffect(() => {
     if (token) {
       getUserOrders();
-      console.log("token ", token);
+      // console.log("token ", token);
     }
   }, [token]);
+
   return (
     <div className="min-h-[50vh] flex flex-col gap-9 items-center  justify-center px-[8%]">
       <h2 className=" text-2xl font-bold mt-[3rem] self-start">My Orders</h2>
@@ -50,8 +53,12 @@ const MyOrders = () => {
               {order.status}
             </p>
             <button
-              onClick={getUserOrders}
-              className="bg-red-200 px-6 text-gray-700 py-3 cursor-pointer rounded-md"
+              onClick={() => {
+                getUserOrders;
+                toast.info("Your orders is being tracked!");
+              }}
+              className="bg-red-200 px-6 text-gray-700 py-3 cursor-pointer rounded-md 
+             hover:bg-red-400 hover:text-white transition-all duration-300"
             >
               Track Order
             </button>

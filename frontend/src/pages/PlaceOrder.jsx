@@ -26,7 +26,7 @@ const PlaceOrder = () => {
     let keys = e.target.name;
     let values = e.target.value;
     setUserInfo((userInfo) => ({ ...userInfo, [keys]: values }));
-    console.log(userInfo);
+    // console.log(userInfo);
   };
 
   const placeOrder = async (e) => {

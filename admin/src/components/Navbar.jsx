@@ -3,13 +3,13 @@ import logo from "../assets/logo.png";
 import profile_image from "../assets/nav_image.jpg";
 const Navbar = () => {
   return (
-    <div className=" py-3]">
+    <div className="py-3">
       <div className="px-[3%] flex items-center justify-between">
         <img src={logo} alt="logo" className="w-[10rem]" />
         <img
           src={profile_image}
           alt="profile_image"
-          className="w-[45px] rounded-full"
+          className="w-[4rem]  rounded-full"
         />
       </div>
       <hr className="mt-4 border-0 bg-slate-300 h-[2px]" />

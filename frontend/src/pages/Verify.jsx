@@ -14,8 +14,8 @@ const Verify = () => {
   // let success = url.split("&")[0].split("=")[1];
   // let orderId = url.split("&")[1].split("=")[1];
 
-  console.log("sucess ", success);
-  console.log("orderId ", orderId);
+  // console.log("sucess ", success);
+  // console.log("orderId ", orderId);
 
   const verifyPayment = async () => {
     try {
@@ -28,7 +28,7 @@ const Verify = () => {
       } else {
         navigate("/");
       }
-      console.log(myResponse);
+      console.log(myResponse.data);
     } catch (error) {
       console.log(error);
     }

@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import axios from "axios";
 import { StoreContext } from "../context/StoreContext";
+import { toast } from "react-toastify";
 
 const LoginPop = ({ setIsLogin }) => {
   const { url, setToken } = useContext(StoreContext);
@@ -15,11 +16,15 @@ const LoginPop = ({ setIsLogin }) => {
     let keys = e.target.name;
     let values = e.target.value;
     setData((data) => ({ ...data, [keys]: values }));
-    console.log(data);
+    // console.log(data);
   };
 
   const handleAuth = async (e) => {
     e.preventDefault();
+
+    if (!data.email || !data.password) {
+      return toast.error("please fill all data");
+    }
     try {
       let myResponse = await axios.post(
         `${url}/api/auth/${loginState == "login" ? "login" : "register"}`,
@@ -28,11 +33,12 @@ const LoginPop = ({ setIsLogin }) => {
       console.log(myResponse.data);
       if (myResponse.data.success) {
         setToken(myResponse.data.token);
+        toast.success(myResponse.data.message);
         // save token to local storage
         localStorage.setItem("food_flow_token", myResponse.data.token);
         setIsLogin(false);
       } else {
-        alert(myResponse.data.message);
+        toast.error(myResponse.data.message);
       }
     } catch (error) {
       console.log(error);
@@ -75,7 +81,7 @@ const LoginPop = ({ setIsLogin }) => {
           />
           <input
             className="bg-transparent border border-gray-300 outline-0 rounded-lg py-2 px-3 w-full"
-            type="text"
+            type="password"
             placeholder="Password"
             name="password"
             value={data.password}
@@ -84,10 +90,11 @@ const LoginPop = ({ setIsLogin }) => {
 
           <button
             onClick={handleAuth}
-            className="bg-[tomato] py-2 text-white rounded-lg w-full cursor-pointer"
+            className="bg-[tomato] hover:bg-red-500 transition-all duration-300 ease-in-out py-2 text-white rounded-lg w-full cursor-pointer shadow-md hover:shadow-lg hover:scale-[1.02]"
           >
             {loginState !== "login" ? "Create account" : "Login"}
           </button>
+
           <div className="flex justify-start items-start w-full   gap-2">
             <input className="mt-1" type="checkbox" />
             <p className="text-[15px] text-gray-500 items-start ">
