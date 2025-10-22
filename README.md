@@ -26,7 +26,7 @@ The app integrates **Stripe** for secure payments, includes robust **authenticat
 - **Deployment:** Vercel / Heroku  
 
 ---
-## 🛠️ Demo (recorded)
+## 🎥 Demo (Recorded)
 
 - .
 ---
