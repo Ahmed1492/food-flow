@@ -1,6 +1,6 @@
 import React from "react";
 import logo from "../assets/logo.png";
-import profile_image from "../assets/profile_image.png";
+import profile_image from "../assets/nav_image.jpg";
 const Navbar = () => {
   return (
     <div className=" py-3]">
@@ -9,7 +9,7 @@ const Navbar = () => {
         <img
           src={profile_image}
           alt="profile_image"
-          className="w-[42px] rounded-full"
+          className="w-[45px] rounded-full"
         />
       </div>
       <hr className="mt-4 border-0 bg-slate-300 h-[2px]" />

@@ -10,7 +10,7 @@ export const StoreContextProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState({});
   const [token, setToken] = useState("");
   const [data, setData] = useState([]);
-
+  const [userData, setUserData] = useState({});
   // --------------------------- clinet --------------------------------
   const addToCart = async (itemId) => {
     if (!cartItems[itemId]) {
@@ -106,6 +106,19 @@ export const StoreContextProvider = ({ children }) => {
   };
   // --------------------------- server --------------------------------
 
+  const fetchUserData = async () => {
+    try {
+      let myResponse = await axios(`${url}/api/auth/user-data`, {
+        headers: { token },
+      });
+      setUserData(myResponse.data.user);
+
+      console.log(myResponse.data.user);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const contextValue = {
     food_list,
     addToCart,
@@ -120,6 +133,8 @@ export const StoreContextProvider = ({ children }) => {
     setData,
     addToCartServer,
     removeFromCartServer,
+    userData,
+    fetchUserData
   };
 
   useEffect(() => {
@@ -130,6 +145,7 @@ export const StoreContextProvider = ({ children }) => {
     if (localStorage.getItem("food_flow_token")) {
       setToken(localStorage.getItem("food_flow_token"));
       fetchCardData();
+      fetchUserData();
     }
     // console.log("token ", token);
   }, [token]);
