@@ -10,7 +10,7 @@ The app integrates **Stripe** for secure payments, includes robust **authenticat
 
 - **For Users:** Browse food items, add them to a cart, and complete purchases through a secure checkout process.  
 - **For Admins:** Manage food inventory, upload images, and track or update customer orders.  
-- **Core Integrations:** Stripe for payments, JWT for authentication, and Cloudinary for image uploads.  
+- **Core Integrations:** Stripe for payments, JWT for authentication, and useing multer for image uploads (local).  
 
 ---
 
