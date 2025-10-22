@@ -192,7 +192,9 @@ const PlaceOrder = () => {
         <div className="flex items-center justify-center md:block">
           <button
             type="submit"
-            className="bg-red-400  text-white px-[2rem]  cursor-pointer py-[11px] rounded-lg mt-2"
+            className="bg-red-400  text-white px-[2rem]  cursor-pointer py-[11px] rounded-lg mt-2 hover:bg-red-500 duration-300
+hover:shadow-lg
+hover:scale-[1.02]"
           >
             PROCEED TO PAYMENT
           </button>

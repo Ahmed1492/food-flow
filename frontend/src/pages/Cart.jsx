@@ -12,7 +12,7 @@ const Cart = () => {
   let deliveryFee = total > 0 ? 2 : 0;
 
   const navigate = useNavigate();
- 
+
   return (
     <div className="px-[7%] md:px-[12%] pt-8 min-h-[43vh] text-sm lg:text-base">
       {/* Header Row */}
@@ -86,7 +86,9 @@ const Cart = () => {
           <div className="flex items-center justify-center md:block">
             <button
               onClick={() => navigate("/order")}
-              className="bg-red-400  text-white px-[2rem] cursor-pointer  py-[11px] rounded-lg mt-2"
+              className="bg-red-400  text-white px-[2rem] cursor-pointer  py-[11px] rounded-lg mt-2 hover:bg-red-500
+hover:shadow-lg
+hover:scale-[1.02] duration-300"
             >
               PROCEED TO CHECKOUT
             </button>

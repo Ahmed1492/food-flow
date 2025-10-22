@@ -1,5 +1,3 @@
-import React from "react";
-
 const Header = () => {
   return (
     <div className="bg-header w-full h-[50vh] md:h-[74vh] test2 md:test1 ">
