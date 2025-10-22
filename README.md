@@ -21,9 +21,9 @@ The app integrates **Stripe** for secure payments, includes robust **authenticat
 - **Database:** MongoDB  
 - **Authentication:** JWT (JSON Web Tokens)  
 - **Payments:** Stripe API  
-- **Image Uploads:** Cloudinary  
+- **Image Uploads:** Multer (local storage)  
 - **State Management:** React Context API  
-- **Deployment:** Vercel / Heroku  
+
 
 ---
 ## 🎥 Demo (Recorded)
