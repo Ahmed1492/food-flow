@@ -28,7 +28,7 @@ The app integrates **Stripe** for secure payments, includes robust **authenticat
 ---
 ## 🎥 Demo (Recorded)
 
-- .
+- https://www.linkedin.com/posts/activity-7386867957064155136-ktGH?utm_source=share&utm_medium=member_android&rcm=ACoAAD-hKsAB1QXZ1eSyBx8nGWP48RuYiBX5Bdg
 ---
 ## 👤 User Features
 
