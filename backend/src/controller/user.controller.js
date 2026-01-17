@@ -2,8 +2,8 @@ import User from "../../db/models/user.model.js";
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import validator from 'validator';
-import fs from "fs";
-import path from "path";
+import { v2 as cloudinary } from "cloudinary";
+
 
 // create token
 const createToken = (id) => {
@@ -91,51 +91,58 @@ export const login = async (req, res, next) => {
   }
 };
 
+
+
+
 export const updateImage = async (req, res) => {
   try {
-    const userId = req.userId;
-    const user = await User.findById(userId);
+    const user = await User.findById(req.userId);
+    if (!user) return res.status(404).json({ success: false, message: "User not found" });
+    if (!req.file) return res.status(400).json({ success: false, message: "No image uploaded" });
 
-    if (!user) {
-      return res.status(404).json({ success: false, message: "User not found" });
+    const uploadResult = await new Promise((resolve, reject) => {
+      cloudinary.uploader.upload_stream(
+        { folder: "food-flow/users" },
+        (err, result) => (err ? reject(err) : resolve(result))
+      ).end(req.file.buffer);
+    });
+
+    // Delete old image if exists
+    if (user.public_id) {
+      await cloudinary.uploader.destroy(user.public_id);
     }
 
-    //  If a new image is uploaded
-    if (req.file) {
-      // Delete old image (if it exists)
-      if (user.image) {
-        const oldImagePath = path.join("src/uploads", user.image);
-        fs.unlink(oldImagePath, (err) => {
-          if (err) console.log("Old image not found or already deleted.");
-        });
-      }
+    user.image = uploadResult.secure_url;
+    user.public_id = uploadResult.public_id;
+    await user.save();
 
-      const newFileName = req.file.filename;
-      user.image = newFileName;
-      await user.save();
-
-      return res.json({ success: true, message: "Image updated successfully", image: newFileName });
-    }
-    // If no image uploaded → remove current one
-    else {
-      if (user.image) {
-        const oldImagePath = path.join("src/uploads", user.image);
-        fs.unlink(oldImagePath, (err) => {
-          if (err) console.log("Old image not found or already deleted.");
-        });
-      }
-
-      user.image = undefined;
-      await user.save();
-
-      return res.json({ success: true, message: "Image removed successfully" });
-    }
-
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({ success: false, message: error.message });
+    return res.json({ success: true, message: "Image updated successfully", image: uploadResult.secure_url });
+  } catch (err) {
+    console.error("Update image error:", err);
+    return res.status(500).json({ success: false, message: err.message });
   }
 };
+
+export const removeImage = async (req, res) => {
+  try {
+    const user = await User.findById(req.userId);
+    if (!user || !user.image) return res.status(404).json({ success: false, message: "No image found" });
+
+    if (user.public_id) {
+      await cloudinary.uploader.destroy(user.public_id);
+    }
+
+    user.image = null;
+    user.public_id = null;
+    await user.save();
+
+    return res.json({ success: true, message: "Profile image removed successfully" });
+  } catch (err) {
+    console.error("Remove image error:", err);
+    return res.status(500).json({ success: false, message: err.message });
+  }
+};
+
 
 
 // get user data 

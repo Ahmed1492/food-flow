@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { getAllUsers, login, register, updateImage, userData } from "../controller/user.controller.js";
-import multer from 'multer';
+import { getAllUsers, login, register, removeImage, updateImage, userData } from "../controller/user.controller.js";
 import authMiddleware from "../middleware/auth.js";
+import upload from "../middleware/uploadMiddleware.js";
 const router = Router();
 
 
@@ -17,20 +17,18 @@ router.post('/login', login);
 
 // -------------------------news -------------------------------
 
-// image storage engine
-const storage = multer.diskStorage({
-  destination: "src/uploads",
-  filename: (req, file, cb) => {
-    return cb(null, `${Date.now()}${file.originalname}`);
-  }
-});
-const upload = multer({ storage });
+router.post(
+  "/add-image",
+  authMiddleware,
+  upload.single("image"),
+  updateImage
+);
 
-// add profile image
-router.post('/add-image', upload.single('image'), authMiddleware, updateImage);
+
+router.delete('/remove-image', authMiddleware, removeImage);
 
 // get user data {when is loggin}
-router.get('/user-data', authMiddleware, userData)
+router.get('/user-data', authMiddleware, userData);
 
 
 

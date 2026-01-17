@@ -4,6 +4,8 @@ import User from "../../db/models/user.model.js";
 
 const authMiddleware = async (req, res, next) => {
   let { token } = req.headers;
+  // console.log('token ', token);
+
   if (!token) {
     return res.json({ success: false, message: 'you are not authorized' });
   }
@@ -13,7 +15,7 @@ const authMiddleware = async (req, res, next) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
 
     // get correct property name (id or _id)
-    const userId = decoded.id ;
+    const userId = decoded.id;
 
     // attach to request
     req.userId = userId;

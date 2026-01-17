@@ -46,11 +46,28 @@ const Navbar = ({ setIsLogin }) => {
         formData,
         {
           headers: { token },
-        }
+        },
       );
       toast.success(myResponse.data.message);
       console.log(image ? `URL :${url}/images/${myResponse.data.image}` : "");
       console.log(image ? "update image" : "removed  ", myResponse.data);
+      await fetchUserData();
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsOpenMenu(false);
+      setImage(false);
+    }
+  };
+
+  const removeUserImage = async () => {
+    try {
+      const myResponse = await axios.delete(`${url}/api/auth/remove-image`, {
+        headers: { token },
+      });
+      console.log(myResponse.data);
+
+      toast.success(myResponse.data.message);
       await fetchUserData();
     } catch (error) {
       console.log(error);
@@ -116,7 +133,7 @@ const Navbar = ({ setIsLogin }) => {
               <img
                 onClick={() => setIsOpenMenu((prev) => !prev)}
                 className="cursor-pointer w-[49px] h-[49px] object-cover rounded-full "
-                src={`${url}/images/${userData?.image}`}
+                src={`${userData?.image}`}
                 alt="profile_icon}"
               />
             ) : (
@@ -124,7 +141,7 @@ const Navbar = ({ setIsLogin }) => {
                 onClick={() => setIsOpenMenu((prev) => !prev)}
                 className="cursor-pointer  w-[49px] h-[49px] bordear rounded-full border-blue-100  object-cover  "
                 src="https://cdn-icons-png.flaticon.com/512/847/847969.png"
-                alt="profile_icon}"
+                alt="profile_icon"
               />
             )}
 
@@ -138,8 +155,8 @@ const Navbar = ({ setIsLogin }) => {
                           image
                             ? URL.createObjectURL(image)
                             : userData?.image
-                            ? `${url}/images/${userData.image}`
-                            : `https://scontent.fcai19-4.fna.fbcdn.net/v/t39.30808-6/486448890_1048083287349494_8994250106993526605_n.jpg?stp=dst-jpg_s640x640_tt6&_nc_cat=108&ccb=1-7&_nc_sid=833d8c&_nc_ohc=tgufuLS7YwoQ7kNvwGlUBzH&_nc_oc=AdkMYT95aqSTMcBpL9H35sfI3XVjborwhQGFlt9oOFCCo4etUixlfBHvzSZC33MEO-0&_nc_zt=23&_nc_ht=scontent.fcai19-4.fna&_nc_gid=D4B1adMeiDlfcFirG-f5Mg&oh=00_AfdWsfhrTQFrHSU3BSnQVDsD5QxnvCWdIop2h5ZZ51VHow&oe=68FE933C`
+                              ? `${userData.image}`
+                              : ` https://cdn-icons-png.flaticon.com/512/847/847969.png`
                         }
                         alt="profile"
                         className={`${"w-[4rem] h-[4rem]"} rounded-full object-cover`}
@@ -163,10 +180,7 @@ const Navbar = ({ setIsLogin }) => {
                         onClick={(e) => {
                           e.stopPropagation();
                           setImage(null);
-                          if (fileInputRef.current) {
-                            fileInputRef.current.value = "";
-                            updateUserImage();
-                          }
+                          removeUserImage();
                         }}
                         className="text-red-600 cursor-pointer inline-block hover:text-red-700 hover:underline transition-all duration-200"
                       >

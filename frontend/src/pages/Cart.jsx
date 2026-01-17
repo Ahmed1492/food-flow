@@ -36,7 +36,7 @@ const Cart = () => {
                 <React.Fragment key={item._id || index}>
                   <div className="flex items-center justify-between">
                     <img
-                      src={`${url}/images/${item.image}`}
+                      src={`${item.image}`}
                       alt={item.name}
                       className="w-16 rounded-md"
                     />
