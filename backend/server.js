@@ -6,7 +6,6 @@ import userRouter from './src/router/user.router.js';
 import cartRouter from './src/router/cart.router.js';
 import orderRouter from './src/router/order.router.js';
 import "dotenv/config";
-import serverless from 'serverless-http';
 
 
 
@@ -31,11 +30,15 @@ app.use('/api/order', orderRouter);
 // db connection
 connectDB();
 
+
+app.get('/', (req, res) => {
+  res.send('Hello World! api works ');
+});
+
+
 // listen {test server}
-// app.listen(port, () => {
-//   console.log(`app is listen on port ${port}`);
+app.listen(port, () => {
+  console.log(`app is listen on port ${port}`);
 
+});
 
-// });
-
-export const handler = serverless(app);

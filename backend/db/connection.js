@@ -2,8 +2,11 @@ import mongoose from "mongoose";
 
 
 export const connectDB = async () => {
-  await mongoose.connect('mongodb+srv://ahmed:01148623288@cluster0.rhuzw8c.mongodb.net/food-flow').then((res) => console.log('DB Connected ')
-  ).catch((err) => console.log(err)
-  );
+  try {
+    mongoose.connection.on('connected', () => console.log('DB Connected'));
+    await mongoose.connect(`${process.env.MONGODB_URL}/food-flow`);
+  } catch (error) {
+    console.log(error.message);
 
+  }
 };
