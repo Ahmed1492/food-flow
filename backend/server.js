@@ -20,10 +20,11 @@ app.use("/api/cart", cartRouter);
 app.use("/api/order", orderRouter);
 
 
-app.get('/', (() => {
-  console.log('API IS WORKING.');
+app.get('/', (req, res) => {
+  res.send('Hello World! api works ');
+});
 
-}));
+
 connectDB();
 
 export default app;
