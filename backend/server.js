@@ -30,6 +30,11 @@ app.use('/api/order', orderRouter);
 // db connection
 connectDB();
 
+app.get('/', (req, res) => {
+  res.send('Hello World! api works ');
+});
+
+
 // listen {test server}
 app.listen(port, () => {
   console.log(`app is listen on port ${port}`);

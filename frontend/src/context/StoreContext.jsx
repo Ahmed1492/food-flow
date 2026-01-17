@@ -6,7 +6,8 @@ import axios from "axios";
 export const StoreContext = createContext(null);
 
 export const StoreContextProvider = ({ children }) => {
-  const url = "http://localhost:4000";
+  const url = import.meta.env.VITE_BACKEND_URL;
+
   const [cartItems, setCartItems] = useState({});
   const [token, setToken] = useState("");
   const [data, setData] = useState([]);
@@ -71,7 +72,7 @@ export const StoreContextProvider = ({ children }) => {
           headers: {
             token: token,
           },
-        }
+        },
       );
       await fetchCardData();
       // console.log(myResponse.data);
@@ -89,7 +90,7 @@ export const StoreContextProvider = ({ children }) => {
           headers: {
             token: token,
           },
-        }
+        },
       );
       await fetchCardData();
       // console.log(myResponse.data);
