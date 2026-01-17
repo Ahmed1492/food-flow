@@ -8,6 +8,8 @@ export const StoreContext = createContext(null);
 export const StoreContextProvider = ({ children }) => {
   const url = import.meta.env.VITE_BACKEND_URL;
 
+  console.log(url);
+
   const [cartItems, setCartItems] = useState({});
   const [token, setToken] = useState("");
   const [data, setData] = useState([]);
