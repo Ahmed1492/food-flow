@@ -2,9 +2,10 @@ import React, { useContext } from "react";
 import { StoreContext } from "../context/StoreContext";
 import { useNavigate } from "react-router-dom";
 import Loading from "../components/Loading";
+import { toast } from "react-toastify";
 
 const Cart = () => {
-  const { cartItems, removeFromCart, cartTotal, data, url } =
+  const { cartItems, removeFromCart, cartTotal, data, token } =
     useContext(StoreContext);
   // console.log("food_list ,", food_list);
   console.log("cart items ,", cartItems);
@@ -13,16 +14,21 @@ const Cart = () => {
 
   const navigate = useNavigate();
 
+  const handlePlaceOrder = () => {
+    if (!token) return toast.info("Login First.");
+    navigate("/order");
+  };
+
   return (
     <div className="px-[7%] md:px-[12%] pt-8 min-h-[43vh] text-sm lg:text-base  ">
       <div className="min-w-[24rem] sm:min-w-0   w-full ">
         {/* Header Row */}
         <div className="grid grid-cols-6 gap-5 text-gray-500 text-sm md:text-lg  ">
           <p className="md:w-30">Items</p>
-          <p className="  ">Title</p>
-          <p className="  ">Price</p>
-          <p className="  ">Quantity</p>
-          <p className="  ">Total</p>
+          <p className="">Title</p>
+          <p className="">Price</p>
+          <p className="">Quantity</p>
+          <p className="">Total</p>
           <p className=" text-center ">Remove</p>
         </div>
 
@@ -88,7 +94,7 @@ const Cart = () => {
             <hr className="my-4 border-gray-200" />
             <div className="flex items-start justify-start md:block">
               <button
-                onClick={() => navigate("/order")}
+                onClick={handlePlaceOrder}
                 className="bg-red-400  text-white px-[2rem] cursor-pointer  py-[11px] rounded-lg mt-2 hover:bg-red-500
 hover:shadow-lg
 hover:scale-[1.02] duration-300"

@@ -45,7 +45,7 @@ const Navbar = ({ setIsLogin }) => {
         `${url}/api/auth/add-image`,
         formData,
         {
-          headers: { token  , "ngrok-skip-browser-warning": "true",  },
+          headers: { token, "ngrok-skip-browser-warning": "true" },
         },
       );
       toast.success(myResponse.data.message);
@@ -63,7 +63,7 @@ const Navbar = ({ setIsLogin }) => {
   const removeUserImage = async () => {
     try {
       const myResponse = await axios.delete(`${url}/api/auth/remove-image`, {
-        headers: { token  , "ngrok-skip-browser-warning": "true", },
+        headers: { token, "ngrok-skip-browser-warning": "true" },
       });
       console.log(myResponse.data);
 
@@ -85,7 +85,7 @@ const Navbar = ({ setIsLogin }) => {
         src={assets.logo}
         alt="logo"
       />
-      <div className="hidden md:flex items-center text-[17px] gap-6 lg:gap-10">
+      <div className="hidden md:flex  items-center text-[14px] flex-wrap lg:text-[17px] gap-6 lg:gap-10">
         {[
           { name: "home", href: "#" },
           { name: "menu", href: "#explore-menu" },
@@ -111,24 +111,24 @@ const Navbar = ({ setIsLogin }) => {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 md:gap-3 items-center-safe ">
+      <div className="flex gap-9 flex-col sm:flex-row items-center-safe shrink-0 ">
         <img
-          className="cursor-pointer "
+          className="cursor-pointer  "
           src={assets.search_icon}
           alt="search_icon"
         />
-        <Link to="/cart" className="relative">
+        <Link to="/cart" className="relative flex justify-end">
           <img
             className="cursor-pointer  "
             src={assets.basket_icon}
-            alt="basket_icon}"
+            alt="basket_icon"
           />
           {cartItems && Object?.keys(cartItems).length !== 0 && (
             <span className="absolute w-2 h-2 sm:w-3 sm:h-3 bg-red-400 -top-2 right-3 rounded-full"></span>
           )}
         </Link>
         {token ? (
-          <div className="relative ">
+          <div className="relative  ">
             {userData?.image ? (
               <img
                 onClick={() => setIsOpenMenu((prev) => !prev)}
@@ -242,7 +242,7 @@ const Navbar = ({ setIsLogin }) => {
         ) : (
           <button
             onClick={() => setIsLogin(true)}
-            className="border border-gray-400 text-sm md:text-base rounded-full px-[18px] lg:px-[28px] py-2 cursor-pointer hover:bg-[#fff4f2] duration-300"
+            className="border border-gray-400 text-sm md:text-base rounded-full   px-[18px] lg:px-[28px] py-2 cursor-pointer hover:bg-[#fff4f2] duration-300"
           >
             sign in
           </button>

@@ -52,8 +52,11 @@ const LoginPop = ({ setIsLogin }) => {
 
   return (
     <div className="fixed left-0 right-0 top-0 fadeIn  bottom-0 bg-black-light flex  items-center justify-center z-50 ">
-      <form className="bg-white px-4 pt-4 pb-5  w-max rounded-lg" action="">
-        <div className="flex items-center justify-between my-4">
+      <form
+        className="bg-white px-4 pt-4 pb-5 w-[98%] sm:w-[90%] md:w-max rounded-lg"
+        action=""
+      >
+        <div className="flex items-center justify-between my-4  full">
           <h2 className="text-2xl  font-bold">
             {loginState !== "login" ? "Sign Up" : "Login"}
           </h2>
@@ -65,7 +68,7 @@ const LoginPop = ({ setIsLogin }) => {
             x
           </span>
         </div>
-        <div className="flex flex-col gap-5 items-center w-[24rem] mt-[2rem]">
+        <div className="flex flex-col gap-5 items-center w-full  md:w-[24rem] mt-[2rem]">
           {loginState !== "login" && (
             <input
               className="bg-transparent border border-gray-300 outline-0 rounded-lg py-2 px-3 w-full"
@@ -102,14 +105,14 @@ const LoginPop = ({ setIsLogin }) => {
 
           <div className="flex justify-start items-start w-full   gap-2">
             <input className="mt-1" type="checkbox" />
-            <p className="text-[15px] text-gray-500 items-start ">
+            <p className=" text-sm sm:text-[15px] text-gray-500 items-start ">
               By continuing, I agree to the terms of use & <br /> privacy
               policy.
             </p>
           </div>
         </div>
         {loginState === "login" ? (
-          <p className="text-gray-600 mt-[1rem] text-[14px]">
+          <p className="text-gray-600 mt-[1rem] text-sm sm:text-[14px]">
             Create new account?
             <span
               onClick={() => setLoginState("sign-up")}
