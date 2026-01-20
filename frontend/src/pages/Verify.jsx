@@ -19,10 +19,18 @@ const Verify = () => {
 
   const verifyPayment = async () => {
     try {
-      let myResponse = await axios.post(`${url}/api/order/verify`, {
-        orderId,
-        success,
-      });
+      let myResponse = await axios.post(
+        `${url}/api/order/verify`,
+        {
+          orderId,
+          success,
+        },
+        {
+          headers: {
+            "ngrok-skip-browser-warning": "true",
+          },
+        },
+      );
       if (myResponse.data.success) {
         navigate("/my-orders");
       } else {

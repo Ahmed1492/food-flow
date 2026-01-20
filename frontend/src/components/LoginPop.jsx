@@ -28,7 +28,12 @@ const LoginPop = ({ setIsLogin }) => {
     try {
       let myResponse = await axios.post(
         `${url}/api/auth/${loginState == "login" ? "login" : "register"}`,
-        data
+        data,
+        {
+          headers: {
+            "ngrok-skip-browser-warning": "true",
+          },
+        },
       );
       console.log(myResponse.data);
       if (myResponse.data.success) {

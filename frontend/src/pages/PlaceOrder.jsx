@@ -47,7 +47,7 @@ const PlaceOrder = () => {
     };
     try {
       let response = await axios.post(`${url}/api/order/place`, orderData, {
-        headers: { token },
+        headers: { token, "ngrok-skip-browser-warning": "true" },
       });
       console.log("response ", response);
 

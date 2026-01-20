@@ -27,7 +27,7 @@ const ExploreMenu = ({ category, setCategory }) => {
         <img
           src={item.menu_image}
           alt={item.menu_name}
-          className={`w-24 lg:w-28 rounded-full border-4 ${
+          className={`w-26 lg:w-28 rounded-full border-4 ${
             isActive
               ? "border-[tomato] shadow-[0_0_10px_rgba(255,99,71,0.6)]"
               : "border-transparent"

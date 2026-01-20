@@ -18,9 +18,9 @@ const FoodDisplay = ({ category }) => {
 
   return (
     <div id="food-display">
-      <h2 className="text-3xl font-semibold">Top dishes near you</h2>
+      <h2 className="text-3xl font-semibold mb-9">Top dishes near you</h2>
 
-      <div className="flex items-center  mt-[2rem] gap-y-[4rem] gap-x-[2rem] justify-center  md:justify-between flex-wrap">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5  gap-7">
         {data.map((item, index) => {
           if (category === "All" || category === item.category)
             return (

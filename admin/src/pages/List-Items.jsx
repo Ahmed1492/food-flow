@@ -78,7 +78,7 @@ const ListItems = ({ setCurrentPage  , url}) => {
                 <React.Fragment key={index}>
                   <div className="flex items-center px-5 justify-between">
                     <img
-                      src={`${url}/images/${item.image}`}
+                      src={`${item.image}`}
                       alt={food_1}
                       className="w-14 rounded-md"
                     />

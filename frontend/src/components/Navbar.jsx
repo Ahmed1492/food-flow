@@ -45,7 +45,7 @@ const Navbar = ({ setIsLogin }) => {
         `${url}/api/auth/add-image`,
         formData,
         {
-          headers: { token },
+          headers: { token  , "ngrok-skip-browser-warning": "true",  },
         },
       );
       toast.success(myResponse.data.message);
@@ -63,7 +63,7 @@ const Navbar = ({ setIsLogin }) => {
   const removeUserImage = async () => {
     try {
       const myResponse = await axios.delete(`${url}/api/auth/remove-image`, {
-        headers: { token },
+        headers: { token  , "ngrok-skip-browser-warning": "true", },
       });
       console.log(myResponse.data);
 
@@ -81,7 +81,7 @@ const Navbar = ({ setIsLogin }) => {
     <div className="flex items-center  text-[#49557e] justify-between px-[8%] py-5 sticky top-1 bg-white z-50 ">
       <img
         onClick={() => navigate("/")}
-        className="w-[80px] sm:w-[150px] cursor-pointer"
+        className="w-[120px] sm:w-[150px] cursor-pointer"
         src={assets.logo}
         alt="logo"
       />
@@ -111,20 +111,20 @@ const Navbar = ({ setIsLogin }) => {
         ))}
       </div>
 
-      <div className="flex items-center gap-4 sm:gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 md:gap-3 items-center-safe ">
         <img
-          className="cursor-pointer w-4  sm:w-5 lg:w-6"
+          className="cursor-pointer "
           src={assets.search_icon}
-          alt="search_icon}"
+          alt="search_icon"
         />
         <Link to="/cart" className="relative">
           <img
-            className="cursor-pointer w-4  sm:w-5 lg:w-6"
+            className="cursor-pointer  "
             src={assets.basket_icon}
             alt="basket_icon}"
           />
           {cartItems && Object?.keys(cartItems).length !== 0 && (
-            <span className="absolute w-2 h-2 sm:w-3 sm:h-3 bg-red-400 -top-2 -right-2 rounded-full"></span>
+            <span className="absolute w-2 h-2 sm:w-3 sm:h-3 bg-red-400 -top-2 right-3 rounded-full"></span>
           )}
         </Link>
         {token ? (
@@ -132,9 +132,9 @@ const Navbar = ({ setIsLogin }) => {
             {userData?.image ? (
               <img
                 onClick={() => setIsOpenMenu((prev) => !prev)}
-                className="cursor-pointer w-[49px] h-[49px] object-cover rounded-full "
+                className="cursor-pointer w-[40px] h-[40px] md:w-[49px] md:h-[49px] object-cover rounded-full "
                 src={`${userData?.image}`}
-                alt="profile_icon}"
+                alt="profile_icon"
               />
             ) : (
               <img
@@ -146,7 +146,7 @@ const Navbar = ({ setIsLogin }) => {
             )}
 
             {isOpenMenu && (
-              <ul className="absolute w-[12rem] p-3 rounded-md bg-red-100 flex flex-col gap-3 -left-20 -bottom-[14rem] text-black z-10">
+              <ul className="absolute w-[12rem] p-3 rounded-md bg-red-100 flex flex-col gap-3  -left-35 md:-left-20 top-12  md:-bottom-[14rem] text-black z-10">
                 <li className="flex flex-col items-center gap-3 cursor-pointer">
                   <div className="flex flex-col gap-2 items-center relative">
                     <label className="cursor-pointer flex flex-col items-center gap-2">

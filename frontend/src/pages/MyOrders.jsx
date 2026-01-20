@@ -11,7 +11,7 @@ const MyOrders = () => {
   const getUserOrders = async () => {
     try {
       let response = await axios.get(`${url}/api/order/user-orders`, {
-        headers: { token },
+        headers: { token, "ngrok-skip-browser-warning": "true" },
       });
       setUserOrders(response.data.orders);
     } catch (error) {

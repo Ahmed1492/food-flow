@@ -8,7 +8,7 @@ const Footer = () => {
   return (
     <div
       id="footer"
-      className="bg-[#313131] text-white pt-[4rem] pb-[1rem]  mt-[3rem] "
+      className="bg-[#313131] text-white pt-[3rem] pb-[1rem]  mt-[1.6rem] md:mt-[3rem] "
     >
       <div className=" flex flex-col text-sm md:text-base gap-y-8 md:flex-row items-center text-center md:text-left md:items-start  justify-center md:justify-around">
         {/* LEFT */}

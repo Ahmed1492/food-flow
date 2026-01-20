@@ -16,7 +16,7 @@ const Food_Item = ({ item, url }) => {
       <div className="relative">
         <img
           src={`${item.image}`}
-          className=" w-[17rem] sm:w-[20rem] md:w-[17rem] lg:w-[19rem] rounded-t-lg"
+          className="w-full rounded-t-lg"
           alt="itemImage"
         />
         {!cartItems?.[item._id] ? (

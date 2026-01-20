@@ -55,7 +55,11 @@ export const StoreContextProvider = ({ children }) => {
   const getFoods = async () => {
     try {
       setFoodLoading(true);
-      let myResponse = await axios.get(`${url}/api/food/get`);
+      let myResponse = await axios.get(`${url}/api/food/get`, {
+        headers: {
+          "ngrok-skip-browser-warning": "true",
+        },
+      });
       // console.log(myResponse.data.food);
       setData(myResponse.data.food);
     } catch (error) {
@@ -73,6 +77,7 @@ export const StoreContextProvider = ({ children }) => {
         {
           headers: {
             token: token,
+            "ngrok-skip-browser-warning": "true",
           },
         },
       );
@@ -91,6 +96,7 @@ export const StoreContextProvider = ({ children }) => {
         {
           headers: {
             token: token,
+            "ngrok-skip-browser-warning": "true",
           },
         },
       );
@@ -106,6 +112,7 @@ export const StoreContextProvider = ({ children }) => {
       let myResponse = await axios.get(`${url}/api/cart/get`, {
         headers: {
           token: token,
+          "ngrok-skip-browser-warning": "true",
         },
       });
       // console.log("cart items ", myResponse.data.userCart);
@@ -120,7 +127,7 @@ export const StoreContextProvider = ({ children }) => {
   const fetchUserData = async () => {
     try {
       let myResponse = await axios(`${url}/api/auth/user-data`, {
-        headers: { token },
+        headers: { token, "ngrok-skip-browser-warning": "true" },
       });
       setUserData(myResponse.data.user);
 
