@@ -36,7 +36,7 @@ const Verify = () => {
       } else {
         navigate("/");
       }
-      console.log(myResponse.data);
+      // console.log(myResponse.data);
     } catch (error) {
       console.log(error);
     }

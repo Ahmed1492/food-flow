@@ -35,7 +35,7 @@ const LoginPop = ({ setIsLogin }) => {
           },
         },
       );
-      console.log(myResponse.data);
+      // console.log(myResponse.data);
       if (myResponse.data.success) {
         setToken(myResponse.data.token);
         toast.success(myResponse.data.message);

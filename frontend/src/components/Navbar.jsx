@@ -49,8 +49,8 @@ const Navbar = ({ setIsLogin }) => {
         },
       );
       toast.success(myResponse.data.message);
-      console.log(image ? `URL :${url}/images/${myResponse.data.image}` : "");
-      console.log(image ? "update image" : "removed  ", myResponse.data);
+      // console.log(image ? `URL :${url}/images/${myResponse.data.image}` : "");
+      // console.log(image ? "update image" : "removed  ", myResponse.data);
       await fetchUserData();
     } catch (error) {
       console.log(error);
@@ -65,7 +65,7 @@ const Navbar = ({ setIsLogin }) => {
       const myResponse = await axios.delete(`${url}/api/auth/remove-image`, {
         headers: { token, "ngrok-skip-browser-warning": "true" },
       });
-      console.log(myResponse.data);
+      // console.log(myResponse.data);
 
       toast.success(myResponse.data.message);
       await fetchUserData();

@@ -8,7 +8,7 @@ const Cart = () => {
   const { cartItems, removeFromCart, cartTotal, data, token } =
     useContext(StoreContext);
   // console.log("food_list ,", food_list);
-  console.log("cart items ,", cartItems);
+  // console.log("cart items ,", cartItems);
   let total = cartTotal();
   let deliveryFee = total > 0 ? 2 : 0;
 

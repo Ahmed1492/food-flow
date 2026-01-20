@@ -49,7 +49,7 @@ const PlaceOrder = () => {
       let response = await axios.post(`${url}/api/order/place`, orderData, {
         headers: { token, "ngrok-skip-browser-warning": "true" },
       });
-      console.log("response ", response);
+      // console.log("response ", response);
 
       if (response.data.success) {
         const { session_url } = response.data;
