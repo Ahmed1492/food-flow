@@ -1,35 +1,36 @@
 # 🍴 Full‑Stack Food Ordering App
 
 A modern web application that delivers a seamless food ordering experience for both customers and administrators.  
-Users can browse menus, manage their cart, and securely pay for orders, while admins can manage inventory and monitor order statuses.  
-The app integrates **Stripe** for secure payments, includes robust **authentication**, and enforces **role‑based access control**.
+Users can browse menus, manage their cart, and securely pay for orders, while admins manage inventory and monitor order statuses.  
+The app integrates **Stripe** for secure payments, **Cloudinary** for image storage, and implements **authentication** with **role‑based access control**.
 
 ---
 
 ## 📖 Project Overview
-
 - **For Users:** Browse food items, add them to a cart, and complete purchases through a secure checkout process.  
 - **For Admins:** Manage food inventory, upload images, and track or update customer orders.  
-- **Core Integrations:** Stripe for payments, JWT for authentication, and useing multer for image uploads (local).  
+- **Core Integrations:** Stripe (payments), JWT (authentication), Cloudinary (image uploads).  
 
 ---
 
 ## 🛠️ Technologies Used
-
 - **Frontend:** React.js, Tailwind CSS  
 - **Backend:** Node.js, Express.js  
 - **Database:** MongoDB  
 - **Authentication:** JWT (JSON Web Tokens)  
 - **Payments:** Stripe API  
-- **Image Uploads:** Multer (local storage)  
+- **Image Uploads:** Cloudinary  
 - **State Management:** React Context API  
 
+---
+
+## 🎥 Demo
+- 🔴 **Live Demo:** [Live Demo](https://food-flow-livid.vercel.app/)  
+
+- 📼 **Recorded Demo:** [Recorded Demo](https://www.linkedin.com/posts/activity-7386867957064155136-ktGH?utm_source=share&utm_medium=member_android&rcm=ACoAAD-hKsAB1QXZ1eSyBx8nGWP48RuYiBX5Bdg)
 
 ---
-## 🎥 Demo (Recorded)
 
-- https://www.linkedin.com/posts/activity-7386867957064155136-ktGH?utm_source=share&utm_medium=member_android&rcm=ACoAAD-hKsAB1QXZ1eSyBx8nGWP48RuYiBX5Bdg
----
 ## 👤 User Features
 
 ### 🔑 Account Management
@@ -60,7 +61,7 @@ The app integrates **Stripe** for secure payments, includes robust **authenticat
 ---
 
 ## 🥘 Food Management (Admin)
-- Add new food items with image upload  
+- Add new food items with image upload via **Cloudinary**  
 - Retrieve a list of all available foods  
 - Remove or update food items  
 
@@ -69,8 +70,7 @@ The app integrates **Stripe** for secure payments, includes robust **authenticat
 ## 📦 Order Management
 - Place an order (login required)  
 - Verify an order after payment  
-- Users can view their own order history  
-- Admins can:  
+- **Users:** View personal order history  
+- **Admins:**  
   - View all orders  
   - Update the status of any order  
-
